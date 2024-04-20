@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Motion-Language Platform</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+        <style>
+            body {
+                padding-top: 100px;
+                padding-bottom:100px;
+                min-height:100vh;
+                position:relative;
+            }
+    
+            .navbar {
+                background:  #6a6f75;
+                height: 70px;
+            }
+    
+            .navbar-brand {
+                color: #ffffff;
+                font-weight: bold;
+                font-size: 24px;
+                line-height: 70px;
+            }
+    
+            .navbar-nav .nav-link {
+                color: #ffffff;
+                font-size: 18px;
+                line-height: 70px;
+                margin-left: 20px;
+            }
+    
+            .navbar-nav .nav-link:hover,
+            .navbar-nav .nav-link.active {
+                color: #ffffff;
+            }
+    
+            .footer {
+                background:  #6a6f75;
+                color: #ffffff;
+                text-align: center;
+                margin-top:60px;
+                padding: 20px 0 ;
+                bottom: 0;
+                width: 100%;
+                position:absolute;
+            }
+    
+            .footer p {
+                margin-bottom: 0;
+            }
+            #annotate-motion #motion {
+                height: 490px;
+            }
+
+            #motion-loading {
+                height: 100%;
+            } 
+
+            #annotate-motion #motion-content {
+                height: 400px;
+            }
+
+
+            #motion-ui {
+                padding-top: 20px;
+            }
+            
+            #motion-ui table {
+                width: 100%;
+            }
+
+            #motion-ui table .left {
+                padding-right: 20px;
+            }
+
+            #motion-ui table .right {
+                width: 80px;
+            }
+
+            #motion-ui-slider {
+                width: 100%;
+            }
+
+            #motion-ui input[type="button"] {
+                width: 100%;
+            }
+
+            .glyphicon-refresh-animate {
+                -animation: spin 1s infinite linear;
+                -webkit-animation: spin2 1s infinite linear;
+            }
+            
+            @-webkit-keyframes spin2 {
+                from { -webkit-transform: rotate(0deg);}
+                to { -webkit-transform: rotate(360deg);}
+            }
+            
+            @keyframes spin {
+                from { transform: scale(1) rotate(0deg);}
+                to { transform: scale(1) rotate(360deg);}
+            }
+            
+            .vertical-center {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        </style>    
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                </i>Motion-Language Platform</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_page == 'home' %}active{% endif %}" href="{{ url_for('homePage') }}"><i class="fas fa-home"></i> Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Motion-Tools
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{{ url_for('motion.import.import_motion') }}">Add Motion</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('motion.annotation.annotation') }}">  Annotating Motion   </a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('motion.transform.transformation') }}">  Transform Motion    </a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('motion.export.export') }}">  Export Motion   </a></li> 
+                            </ul>
+                        </li> 
+                        <form action="{{ url_for('login.logout') }}" method="post">
+                            <button type="submit" class="nav-link" style="border: none; background: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(".dropdown-toggle").dropdown();
+            });
+        </script>
+    
+        {% block content %}
+        {% endblock %}
+    
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2024 Motion-Language Platform@IVLab. All rights reserved.</p>
+            </div>
+        </footer>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    </body>
+</html>
