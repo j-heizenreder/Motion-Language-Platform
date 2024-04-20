@@ -226,37 +226,6 @@
         <div style="text-align: justify;">
             In the field of autonomous driving, a key challenge is the "reality gap": transferring knowledge gained in simulation to real-world settings. Despite various approaches to mitigate this gap, there's a notable absence of solutions targeting agent behavior generation which are crucial for mimicking spontaneous, erratic, and realistic actions of traffic participants. Recent advancements in Generative AI have enabled the representation of human activities in semantic space and generate real human motion from textual descriptions. Despite current limitations such as modality constraints, motion sequence length, resource demands, and data specificity, there's an opportunity to innovate and use these techniques in the intelligent vehicles domain. We propose Walk-the-Talk, a motion generator utilizing Large Language Models (LLMs) to produce reliable pedestrian motions for high-fidelity simulators like CARLA. Thus, we contribute to autonomous driving simulations by aiming to scale realistic, diverse long-tail agent motion data - currently a gap in training datasets. We employ Motion Capture (MoCap) techniques to develop the Walk-the-Talk dataset, which illustrates a broad spectrum of pedestrian behaviors in street-crossing scenarios, ranging from standard walking patterns to extreme behaviors such as drunk walking and near-crash incidents. By utilizing this new dataset within a LLM, we facilitate the creation of realistic pedestrian motion sequences, a capability previously unattainable (cf. Figure 1). Additionally, our findings demonstrate that leveraging the Walk-the-Talk dataset enhances cross-domain generalization and significantly improves the Fréchet Inception Distance (FID) score by approximately 15% on the HumanML3D dataset.
         </div>
-        <div class="row" style="text-align: justify;">
-
-            <body>
-                <div id="c1"></div>           
-                <script type="module">
-                    import { run } from "./js/mviz.js";
-                        $(document).ready(function() {
-                            run('assets/motions/0060.npy');
-                        });
-                </script>  
-            </body>
-            <body>
-                <div id="c1"></div>           
-                <script type="module">
-                    import { run } from "./js/mviz.js";
-                        $(document).ready(function() {
-                            run('assets/motions/0043.npy');
-                        });
-                </script>  
-            </body>
-            <body>
-                <div id="c1"></div>           
-                <script type="module">
-                    import { run } from "./js/mviz.js";
-                        $(document).ready(function() {
-                            run('assets/motions/0160.npy');
-                        });
-                </script>  
-            </body>
-
-        </div>
 
         <h2 id="some-more-examples">Some more examples</h2>
 
@@ -289,4 +258,3 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
     </body>
 </html>
-
