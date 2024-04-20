@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    * {
+        box-sizing: border-box
+    }
+
+  svg {
+    position: relative;
+    align-items: center;                       
+  }
+
+  #c1 {
+      position: relative;
+      top: 100px;
+  }
+
+
+</style>
+
+</div class= "container mt-5">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Walk-the-Talk is an adaption of MotionGPT, a T5 language model fine-tuned on a domain specific dataset of human motion capture in the field of autonomous driving. This blog is an exploration of the capabilities of Walk-the-Talk and the potential applications of this technology in autonomous systems, robotics, and animation.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Walk-the-Talk</title>
+
+</head>
+<body>
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endif %}
+<div class="container">
+    <div style="text-align: center; margin: 50px 0;">
+<h1 style="color: #333; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 2.5rem;">Walk-the-Talk: LLM driven pedestrian motion generation</h1>
+</div>
+<div class="language-python highlighter-rouge" style="text-align: center;"><div class="highlight"><pre class="highlight"><code><span class="n">A</span> <span class="n">pedestrian</span> <span class="n">walks</span> <span class="n">towards</span> <span class="n">a</span> <span class="n">corsswalk</span> <span class="n">by</span> <span class="n">waving</span> <span class="n">their</span> <span class="n">right</span> <span class="n">hand</span><span class="p">.</span>
+</code></pre></div></div>
+
+<div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <video src="{{ url_for('home.get_image', filename='skeleton1.mov') }}" loop="" autoplay="" style="width: 320px; height: 240px;"></video>
+        <div style="text-align: center; margin-top: 8px; width: 320px;">Animated Unreal Skeleton from Walk-the-Talk output</div>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <video src="{{ url_for('home.get_image', filename='retarget1.mov') }}" loop="" autoplay="" style="width: 320px; height: 240px;"></video>
+        <div style="text-align: center; margin-top: 8px; width: 320px;">Retargeted animation to a CARLA pedestrian</div>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <video src="{{ url_for('home.get_image', filename='traffic1.mov') }}" loop="" autoplay="" style="width: 320px; height: 240px;"></video>
+        <div style="text-align: center; margin-top: 8px; width: 320px;">Simulation with traffic</div>
+    </div>
+</div>
+
+<div class="language-python highlighter-rouge" style="text-align: center;"><div class="highlight"><pre class="highlight"><code><span class="n">A</span> <span class="n">dizzy</span> <span class="n">jaywalking</span> <span class="n">pedestrian</span> <span class="n">trips</span> <span class="ow">and</span> <span class="n">leans</span> <span class="n">onto</span> <span class="n">a</span> <span class="n">parked</span> <span class="n">vehicle</span><span class="p">.</span>
+</code></pre></div></div>
+
+<div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <video src="{{ url_for('home.get_image', filename='skeleton2.mov') }}" loop="" autoplay="" style="width: 320px; height: 240px;"></video>
+        <div style="text-align: center; margin-top: 8px; width: 320px;">Animated Unreal Skeleton from Walk-the-Talk output</div>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <video src="{{ url_for('home.get_image', filename='retarget2.mov') }}" loop="" autoplay="" style="width: 320px; height: 240px;"></video>
+        <div style="text-align: center; margin-top: 8px; width: 320px;">Retargeted animation to a CARLA pedestrian</div>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <video src="{{ url_for('home.get_image', filename='traffic2.mov') }}" loop="" autoplay="" style="width: 320px; height: 240px;"></video>
+        <div style="text-align: center; margin-top: 8px; width: 320px; ">Simulation with traffic</div>
+    </div>
+</div>
+
+<h2 id="workflow">Workflow</h2>
+<div style="text-align: center;">
+    <p><img src="{{ url_for('home.get_image', filename='Chart_WtT.png') }}" alt="workflow" width="75%"  /></p>
+</div>
+
+<div class="text-center">
+    <b>Walk-the-Talk framework:</b> Using domain-specific data to generate realistic agent behaviours and motions for autonomous driving simulations utilizing Large Language Models.
+</div>
+
+<h2 id="paper-abstract">Paper Abstract</h2>
+
+<div style="text-align: justify;">
+    In the field of autonomous driving, a key challenge is the "reality gap": transferring knowledge gained in simulation to real-world settings. Despite various approaches to mitigate this gap, there's a notable absence of solutions targeting agent behavior generation which are crucial for mimicking spontaneous, erratic, and realistic actions of traffic participants. Recent advancements in Generative AI have enabled the representation of human activities in semantic space and generate real human motion from textual descriptions. Despite current limitations such as modality constraints, motion sequence length, resource demands, and data specificity, there's an opportunity to innovate and use these techniques in the intelligent vehicles domain. We propose Walk-the-Talk, a motion generator utilizing Large Language Models (LLMs) to produce reliable pedestrian motions for high-fidelity simulators like CARLA. Thus, we contribute to autonomous driving simulations by aiming to scale realistic, diverse long-tail agent motion data - currently a gap in training datasets. We employ Motion Capture (MoCap) techniques to develop the Walk-the-Talk dataset, which illustrates a broad spectrum of pedestrian behaviors in street-crossing scenarios, ranging from standard walking patterns to extreme behaviors such as drunk walking and near-crash incidents. By utilizing this new dataset within a LLM, we facilitate the creation of realistic pedestrian motion sequences, a capability previously unattainable (cf. Figure 1). Additionally, our findings demonstrate that leveraging the Walk-the-Talk dataset enhances cross-domain generalization and significantly improves the Fréchet Inception Distance (FID) score by approximately 15% on the HumanML3D dataset.
+</div>
+<div class="row" style="text-align: justify;">
+
+    <body>
+        <div id="c1"></div>           
+        <script type="module">
+            import { run } from "{{ url_for('static', filename='js/mviz.js') }}";
+                $(document).ready(function() {
+                    run('0060.npy');
+                });
+        </script>  
+    </body>
+    <body>
+        <div id="c1"></div>           
+        <script type="module">
+            import { run } from "{{ url_for('static', filename='js/mviz.js') }}";
+                $(document).ready(function() {
+                    run('0043.npy');
+                });
+        </script>  
+    </body>
+    <body>
+        <div id="c1"></div>           
+        <script type="module">
+            import { run } from "{{ url_for('static', filename='js/mviz.js') }}";
+                $(document).ready(function() {
+                    run('0160.npy');
+                });
+        </script>  
+    </body>
+
+</div>
+
+<h2 id="some-more-examples">Some more examples</h2>
+
+<div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <video src="{{ url_for('home.get_image', filename='example1.mov') }}" loop="" autoplay="" style="width: 320px; height: 240px;"></video>
+        <div style="text-align: center; margin-top: 8px; width: 320px;">2 People meeting in the parking lane.</div>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <video src="{{ url_for('home.get_image', filename='example2.mov') }}" loop="" autoplay="" style="width: 320px; height: 240px;"></video>
+        <div style="text-align: center; margin-top: 8px; width: 320px;">A drunk pedestrian falling in front of a car.</div>
+    </div>
+</div>
+
+<h2 id="citation">Citation</h2>
+
+<h2 id="license-and-usage">License and Usage</h2>
+
+<p>Visualizations are done using the work from <a href="https://mviz.omid.al">mViz</a> by <a href="https://omid.al/projects/">Omid Alemi</a>. </p>
+
+</div>
+</body>
+</div>
+{% endblock %}
